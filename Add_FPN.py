@@ -4,11 +4,6 @@ from torchvision.ops.feature_pyramid_network import FeaturePyramidNetwork, LastL
 from torch import nn, Tensor
 from torchvision.models._utils import IntermediateLayerGetter
 
-
-
-
-
-
 class Effnet_BackboneWithFPN(nn.Module):
     def __init__(
         self,
@@ -44,3 +39,34 @@ class Effnet_BackboneWithFPN(nn.Module):
         x = self.body(x)
         x = self.fpn(x)
         return x
+
+class Densenet_BackboneWithFPN(nn.Module):
+    def __init__(
+        self,
+        backbone: nn.Module,
+        return_layers: Dict[str, str],
+        in_channels_list: List[int],
+        out_channels: int,
+        extra_blocks: Optional[ExtraFPNBlock] = None,
+    ) -> None:
+        super().__init__()
+
+        if extra_blocks is None:
+            extra_blocks = LastLevelMaxPool()
+        
+        self.back = backbone
+
+        self.body = IntermediateLayerGetter(self.back.features, return_layers=return_layers)
+        self.fpn = FeaturePyramidNetwork(
+            in_channels_list=in_channels_list,
+            out_channels=out_channels,
+            extra_blocks=extra_blocks,
+        )
+        self.out_channels = out_channels
+        
+        
+
+    def forward(self, x: Tensor) -> Dict[str, Tensor]: 
+        x = self.body(x)
+        x = self.fpn(x)
+        return x  
