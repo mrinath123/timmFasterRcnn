@@ -1,4 +1,5 @@
 # timmFasterRcnn
+Use timm pretrained backbones for you FasterRCNN!
 
 1. model_config.py -> it returns the model,feat_sizes,output channel and the feat layer names, which is reqd by the Add_FPN.py file
 
