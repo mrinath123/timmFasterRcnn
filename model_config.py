@@ -6,6 +6,26 @@ effnet_b3 = {
 "return_layers":{'1':'0', '2': '1', '4': '2', '6': '3'}
 }
 
+effnet_b4 = {
+"feat_size":[32, 56, 160, 448],
+"return_layers":{'1':'0', '2': '1', '4': '2', '6': '3'}
+}
+
+effnet_b5 = {
+"feat_size":[40, 64, 176, 512],
+"return_layers":{'1':'0', '2': '1', '4': '2', '6': '3'}
+}
+
+effnet_b6 = {
+"feat_size":[40, 72, 200, 576],
+"return_layers":{'1':'0', '2': '1', '4': '2', '6': '3'}
+}
+
+effnet_b7 = {
+"feat_size":[48, 80, 224, 640],
+"return_layers":{'1':'0', '2': '1', '4': '2', '6': '3'}
+}
+
 densenet_121 = {
 "feat_size":[256, 512, 1024, 1024],
 "return_layers":{'denseblock1':'0', 'denseblock2': '1', 'denseblock3': '2', 'denseblock4': '3'}
@@ -21,6 +41,30 @@ class BackBoneFeats(Dataset):
             self.backbone = timm.create_model(self.name, pretrained=self.pretrained,num_classes=0, global_pool='')
             self.feat_size = effnet_b3["feat_size"]
             self.return_layers = effnet_b3["return_layers"]
+            self.out_channels = self.feat_size[len(self.feat_size) -1]
+
+        elif (self.name == "efficientnet_b4"):
+            self.backbone = timm.create_model(self.name, pretrained=self.pretrained,num_classes=0, global_pool='')
+            self.feat_size = effnet_b4["feat_size"]
+            self.return_layers = effnet_b4["return_layers"]
+            self.out_channels = self.feat_size[len(self.feat_size) -1]
+
+        elif (self.name == "efficientnet_b5"):
+            self.backbone = timm.create_model(self.name, pretrained=self.pretrained,num_classes=0, global_pool='')
+            self.feat_size = effnet_b5["feat_size"]
+            self.return_layers = effnet_b5["return_layers"]
+            self.out_channels = self.feat_size[len(self.feat_size) -1]
+
+        elif (self.name == "efficientnet_b6"):
+            self.backbone = timm.create_model(self.name, pretrained=self.pretrained,num_classes=0, global_pool='')
+            self.feat_size = effnet_b6["feat_size"]
+            self.return_layers = effnet_b6["return_layers"]
+            self.out_channels = self.feat_size[len(self.feat_size) -1]
+
+        elif (self.name == "efficientnet_b7"):
+            self.backbone = timm.create_model(self.name, pretrained=self.pretrained,num_classes=0, global_pool='')
+            self.feat_size = effnet_b7["feat_size"]
+            self.return_layers = effnet_b7["return_layers"]
             self.out_channels = self.feat_size[len(self.feat_size) -1]
 
         elif(self.name == "densenet121"):
