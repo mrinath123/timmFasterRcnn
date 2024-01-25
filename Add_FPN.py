@@ -1,5 +1,5 @@
-import torch.nn as nn
 from typing import  Dict, Optional, List
+import torch.nn as nn
 from torchvision.ops.feature_pyramid_network import FeaturePyramidNetwork, LastLevelMaxPool, ExtraFPNBlock
 from torch import nn, Tensor
 from torchvision.models._utils import IntermediateLayerGetter
